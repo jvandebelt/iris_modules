@@ -12,7 +12,7 @@
 			<parameter name="gain" value="0"/>
 			<parameter name="outputblocksize" value="16383"/>
 			<port name="output1" class="output"/>
-    	</component>
+    		</component>
 
 	</engine>
 
@@ -52,8 +52,7 @@
 			<port name="input1" class="input"/>
 		</component>
 
-
-	    <component name="filerawwriter1" class="filerawwriter">
+		<component name="filerawwriter1" class="filerawwriter">
 			<parameter name="filename" value="SpectrumAnalyser.txt"/>
 			<port name="input1" class="input"/>
 		</component>
