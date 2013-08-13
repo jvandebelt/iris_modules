@@ -32,8 +32,12 @@ MESSAGE(STATUS "  Processing plot2D.")
 SET(sources
 	Plot2DComponent.cpp
 )
-
-ADD_LIBRARY(comp_gpp_phy_plot2D SHARED ${sources})
-SET_TARGET_PROPERTIES(comp_gpp_phy_plot2D PROPERTIES OUTPUT_NAME "plot2D")
-IRIS_INSTALL(comp_gpp_phy_plot2D)
-IRIS_APPEND_INSTALL_LIST(plot2D)
+FIND_PROGRAM(GNUPLOT_FOUND gnuplot)
+IF (GNUPLOT_FOUND)
+  ADD_LIBRARY(comp_gpp_phy_plot2D SHARED ${sources})
+  SET_TARGET_PROPERTIES(comp_gpp_phy_plot2D PROPERTIES OUTPUT_NAME "plot2D")
+  IRIS_INSTALL(comp_gpp_phy_plot2D)
+  IRIS_APPEND_INSTALL_LIST(plot2D)
+ELSE (GNUPLOT_FOUND)
+  IRIS_APPEND_NOINSTALL_LIST(plot2D)
+ENDIF (GNUPLOT_FOUND)
