@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+
+<softwareradio name="Radio1">
+
+	<engine name="phyengine1" class="phyengine">
+
+		<component name="rtlrx1" class="rtlrx">
+			<parameter name="args" value=""/>
+			<parameter name="deviceindex" value="0"/>
+			<parameter name="rate" value="1000000"/>
+			<parameter name="frequency" value="98100000"/>
+			<parameter name="gain" value="0"/>
+			<parameter name="outputblocksize" value="16383"/>
+			<port name="output1" class="output"/>
+    	</component>
+
+	</engine>
+
+	<engine name="phyengine2" class="phyengine">
+		<component name="fftblock1" class="periodogram">
+			<parameter name="number_of_complex_samples" value="16384"/>
+			<parameter name="blocksize" value="1024"/>
+			<port name="input1" class="input"/>
+			<port name="output1" class="output"/>
+		</component>
+
+		<component name="spselector1" class="sampleselector">
+			<parameter name="sampleoffset" value="0"/>
+			<parameter name="sampletotal" value="1024"/>
+			<port name="input1" class="input"/>
+			<port name="output1" class="output"/>
+		</component>
+
+		<component name="para1" class="serial2para">
+			<parameter name="inputblocksize" value="1024"/>
+			<port name="input1" class="input"/>
+			<port name="output1" class="output"/>
+		</component>
+
+		<component name="splitter1" class="splitter">
+			<parameter name="numoutputs" value="2"/>
+			<port name="input1" class="input"/>
+			<port name="output1" class="output"/>
+	   		<port name="output2" class="output"/>
+		</component>
+
+		<component name="graphicalsink1" class="plot2d">
+			<parameter name="xmin" value="97.6"/>
+			<parameter name="xmax" value="98.6"/>
+			<parameter name="autoscale" value="true" />
+			<parameter name="numberofsamples" value="1024"/>
+			<port name="input1" class="input"/>
+		</component>
+
+
+	    <component name="filerawwriter1" class="filerawwriter">
+			<parameter name="filename" value="SpectrumAnalyser.txt"/>
+			<port name="input1" class="input"/>
+		</component>
+
+	</engine>
+
+
+	<link source="rtlrx1.output1" sink="fftblock1.input1" />
+	<link source="fftblock1.output1" sink="spselector1.input1" /> 
+	<link source="spselector1.output1" sink="para1.input1" />
+	<link source="para1.output1" sink="splitter1.input1" />
+	<link source="splitter1.output1" sink="filerawwriter1.input1" />
+	<link source="splitter1.output2" sink="graphicalsink1.input1" /> 
+
+
+</softwareradio>

@@ -1,12 +1,14 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?> 
 
 <softwareradio name="Radio1">
 
   <engine name="phyengine1" class="phyengine">
 
-    <component name="usrprx1" class="usrprx">
-      <parameter name="frequency" value="5010000000"/>
-      <parameter name="rate" value="500000"/>
+    <component name="rtlrx1" class="rtlrx">
+      <parameter name="rate" value="1000000"/>
+      <parameter name="frequency" value="712000000"/>
+      <parameter name="gain" value="0"/>
+      <parameter name="outputblocksize" value="1024"/>
       <port name="output1" class="output"/>
     </component>
 
@@ -22,7 +24,7 @@
 
   </engine>
 
-  <link source="usrprx1.output1" sink="ofdmdemod1.input1" />
+  <link source="rtlrx1.output1" sink="ofdmdemod1.input1" />
   <link source="ofdmdemod1.output1" sink="filerawwriter1.input1" />
 
 </softwareradio>
