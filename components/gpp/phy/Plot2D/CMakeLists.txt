@@ -32,12 +32,16 @@ MESSAGE(STATUS "  Processing plot2D.")
 SET(sources
 	Plot2DComponent.cpp
 )
+
+MESSAGE(STATUS "checking for program 'gnuplot'")
 FIND_PROGRAM(GNUPLOT_FOUND gnuplot)
 IF (GNUPLOT_FOUND)
   ADD_LIBRARY(comp_gpp_phy_plot2D SHARED ${sources})
   SET_TARGET_PROPERTIES(comp_gpp_phy_plot2D PROPERTIES OUTPUT_NAME "plot2D")
   IRIS_INSTALL(comp_gpp_phy_plot2D)
   IRIS_APPEND_INSTALL_LIST(plot2D)
+  MESSAGE(STATUS "Found gnuplot.")
 ELSE (GNUPLOT_FOUND)
   IRIS_APPEND_NOINSTALL_LIST(plot2D)
+  MESSAGE(STATUS "Could NOT find 'gnuplot'. Install using 'sudo apt-get install gnuplot'")
 ENDIF (GNUPLOT_FOUND)
