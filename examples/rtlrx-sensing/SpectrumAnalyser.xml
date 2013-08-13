@@ -10,7 +10,7 @@
 			<parameter name="rate" value="1000000"/>
 			<parameter name="frequency" value="98100000"/>
 			<parameter name="gain" value="0"/>
-			<parameter name="outputblocksize" value="16383"/>
+			<parameter name="outputblocksize" value="16384"/>
 			<port name="output1" class="output"/>
     		</component>
 
